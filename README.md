@@ -2,29 +2,15 @@
 
 Turn YouTube videos into blog posts, Twitter threads, and social media content.
 
-## Local Testing
+## Site Structure
 
-```bash
-# Run the service
-double-click run_service.bat
-
-# Or from command line
-python youtube_repurposer.py "https://www.youtube.com/watch?v=VIDEO_ID" --output ./output
-```
-
-## Files
-
-- `youtube_repurposer.py` - Main automation script
-- `run_service.bat` - Windows launcher
-- `landing_page.html` - Public landing page
-- `docs/` - SEO articles and guides
-- `portfolio/` - Sample deliverables
-
-## Requirements
-
-- Python 3.8+
-- youtube-transcript-api
-- Windows (tested), also works on macOS/Linux
+- `index.html` - Landing page with services, pricing, and FAQ
+- `order.html` - Customer order/inquiry form
+- `docs/how-to-repurpose-youtube-videos.html` - SEO guide
+- `docs/social-media-strategies.html` - SEO article
+- `portfolio/index.html` - Portfolio showcase
+- `portfolio/polished_sample.md` - Sample deliverables
+- `SERVICE_DESCRIPTION.md` - Service overview
 
 ## Deployment
 
