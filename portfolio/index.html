@@ -44,7 +44,8 @@
             margin-bottom: 30px;
             border-radius: 5px;
         }
-        .nav a {
+        .nav a { outline: none; }
+        .nav a:focus { outline: 2px solid #ffd700; outline-offset: 2px; }
             color: white;
             text-decoration: none;
             margin-right: 15px;
@@ -59,26 +60,44 @@
             margin-bottom: 20px;
             font-size: 0.9em;
         }
-    </style>
+    
+        @media (max-width: 768px) {
+            body { padding: 20px 15px; }
+            h1 { font-size: 1.5em; }
+            h2 { font-size: 1.3em; }
+            .nav { padding: 10px 15px; }
+            .nav a { outline: none; }
+        .nav a:focus { outline: 2px solid #ffd700; outline-offset: 2px; } margin: 5px 10px 5px 0; padding: 8px 12px; min-height: 44px; display: inline-block; }
+        }
+        @media (max-width: 480px) {
+            body { padding: 15px 10px; }
+            h1 { font-size: 1.3em; }
+            .nav a { outline: none; }
+        .nav a:focus { outline: 2px solid #ffd700; outline-offset: 2px; } margin: 4px 6px; padding: 10px 12px; font-size: 0.9em; }
+        }
+        </style>
 </head>
 <body>
-    <div class="nav">
+    <a href="#main" class="skip-link">Skip to main content</a>
+    <nav role="navigation" aria-label="Main navigation" class="nav">
         <a href="../index.html">Home</a>
         <a href="../order.html">Toolkit</a>
         <a href="../docs/how-to-repurpose-youtube-videos.html">Guide</a>
         <a href="../docs/social-media-strategies.html">Tips</a>
-        <a href="../index.html#contact">Contact</a>
-    </div>
+        <a href="https://github.com/surajsingh69/youtube-repurposing-service" target="_blank" rel="noopener noreferrer">Repository</a>
+        <a href="https://github.com/surajsingh69/youtube-repurposing-service/issues" target="_blank" rel="noopener noreferrer">Issues</a>
+    </nav>
 
+    <main id="main" role="main">
     <h1>Portfolio Sample: YouTube Content Repurposing</h1>
 
     <div class="warning-box">
-        <p><strong>Important distinction:</strong> This page contains two different examples so you can see the difference between a human-edited reference and raw automated output.</p>
+        <p><strong>Important distinction:</strong> This page contains two different examples so you can see the difference between a edited reference reference and raw automated output.</p>
         <ul>
-            <li><strong>Human-edited reference example (below):</strong> Shows the target format and quality level after professional editing. This is not representative of what the tool produces on its own.</li>
+            <li><strong>edited reference reference example (below):</strong> Shows the target format and quality level after professional editing. This is not representative of what the tool produces on its own.</li>
             <li><strong>Raw automated first draft (further below):</strong> Shows exactly what the current automated tool generates before any human review or editing.</li>
         </ul>
-        <p><em>The human-edited example is not representative of what the automation produces on its own.</em></p>
+        <p><em>The edited reference example is not representative of what the automation produces on its own.</em></p>
     </div>
 
     <div class="meta">
@@ -88,7 +107,7 @@
         <strong>Package:</strong> Standard (draft only)
     </div>
 
-    <h2>Human-Edited Reference Example (Target Format)</h2>
+    <h2>edited reference Reference Example (Target Format)</h2>
     <p>This example shows the structure and quality achievable after professional editing. It is included to demonstrate the target format only.</p>
 
     <h3>How Neural Networks Recognize Handwritten Digits: A Beginner's Guide</h3>
@@ -110,7 +129,7 @@
 
     <p><strong>Conclusion:</strong> Neural networks sound intimidating, but at their core they're just layered pattern detectors. By understanding how they process information from raw pixels to final predictions, you can better appreciate both their capabilities and their limitations.</p>
 
-    <h2>Deliverable 2: Twitter/X Thread (Human-Edited Reference)</h2>
+    <h2>Deliverable 2: Twitter/X Thread (edited reference Reference)</h2>
 
     <div class="tweet">
         <strong>Tweet 1</strong> (237 chars)<br><br>
@@ -137,7 +156,7 @@
         This mirrors biological vision. Your visual cortex breaks down what you see into edges, then shapes, then objects. Neural networks use the same principle.
     </div>
 
-    <h2>Deliverable 3: Key Quotes (Human-Edited Reference)</h2>
+    <h2>Deliverable 3: Key Quotes (edited reference Reference)</h2>
 
     <blockquote>
         "Your brain recognizes a handwritten '3' instantly, even when it's blurry or pixelated. Computers struggle with this exact task—unless they use neural networks."
@@ -159,12 +178,12 @@
         "The entire network is just a function: 784 inputs, 10 outputs. But it involves roughly 13,000 parameters."
     </blockquote>
 
-    <h2>Deliverable 4: Summary (Human-Edited Reference)</h2>
+    <h2>Deliverable 4: Summary (edited reference Reference)</h2>
 
     <p>This video explains how neural networks learn to recognize handwritten digits by breaking the task into layers. Starting from 784 input neurons representing pixel values, the network uses hidden layers to detect edges, then patterns, then complete digits. With approximately 13,000 weights and biases tuned during training, even a simple network can achieve remarkable pattern recognition. Modern networks often use ReLU activation functions instead of sigmoid for faster training.</p>
 
     <h2>Raw Automated First Draft (Current Tool Output)</h2>
-    <p>The following is the actual output from the current automated tool, with no human editing applied. This shows the unfiltered first-draft quality you can expect.</p>
+    <p>The following is the actual output from the current automated tool, with no editing applied. This shows the unfiltered first-draft quality you can expect.</p>
 
     <div class="raw-output">
         <h3>Blog Draft</h3>
@@ -223,5 +242,6 @@
         <p>Source: 3Blue1Brown, "But what is a Neural Network?" — Used for portfolio demonstration only.</p>
         <p style="margin-top: 10px;"><a href="../index.html">← Back to toolkit</a></p>
     </div>
+    </main>
 </body>
 </html>

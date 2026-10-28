@@ -38,22 +38,41 @@
             margin-bottom: 30px;
             border-radius: 5px;
         }
-        .nav a {
+        .nav a { outline: none; }
+        .nav a:focus { outline: 2px solid #ffd700; outline-offset: 2px; }
             color: white;
             text-decoration: none;
             margin-right: 15px;
         }
-    </style>
+    
+        @media (max-width: 768px) {
+            body { padding: 20px 15px; }
+            h1 { font-size: 1.5em; }
+            h2 { font-size: 1.3em; }
+            .nav { padding: 10px 15px; }
+            .nav a { outline: none; }
+        .nav a:focus { outline: 2px solid #ffd700; outline-offset: 2px; } margin: 5px 10px 5px 0; padding: 8px 12px; min-height: 44px; display: inline-block; }
+        }
+        @media (max-width: 480px) {
+            body { padding: 15px 10px; }
+            h1 { font-size: 1.3em; }
+            .nav a { outline: none; }
+        .nav a:focus { outline: 2px solid #ffd700; outline-offset: 2px; } margin: 4px 6px; padding: 10px 12px; font-size: 0.9em; }
+        }
+        </style>
 </head>
 <body>
-    <div class="nav">
+    <a href="#main" class="skip-link">Skip to main content</a>
+    <nav role="navigation" aria-label="Main navigation" class="nav">
         <a href="../index.html">Home</a>
         <a href="how-to-repurpose-youtube-videos.html">Guide</a>
         <a href="social-media-strategies.html">Tips</a>
         <a href="../portfolio/index.html">Examples</a>
-        <a href="../index.html#contact">Contact</a>
-    </div>
+        <a href="https://github.com/surajsingh69/youtube-repurposing-service" target="_blank" rel="noopener noreferrer">Repository</a>
+        <a href="https://github.com/surajsingh69/youtube-repurposing-service/issues" target="_blank" rel="noopener noreferrer">Issues</a>
+    </nav>
 
+    <main id="main" role="main">
     <h1>5 Ways to Turn Video Content into Social Media Posts</h1>
     
     <p>YouTube videos are full of social media content waiting to be extracted. A single 20-minute video can yield multiple tweets, LinkedIn posts, Instagram captions, and Facebook updates. Here are five practical strategies to maximize your video's reach across platforms.</p>
@@ -112,5 +131,6 @@
         <p>Download the free YouTube content toolkit to extract quotes, write threads, and create blog drafts from your videos.</p>
         <p><a href="../order.html">Download the Free Toolkit →</a></p>
     </div>
+    </main>
 </body>
 </html>

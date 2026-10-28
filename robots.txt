@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://surajsingh69.github.io/youtube-repurposing-service/sitemap.xml

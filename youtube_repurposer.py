@@ -602,7 +602,7 @@ def main():
     parser = argparse.ArgumentParser(
         description="YouTube Content Repurposing Service v2 - Generate multiple content formats from a video"
     )
-    parser.add_argument("url", help="YouTube video URL")
+    parser.add_argument("url", nargs="?", help="YouTube video URL")
     parser.add_argument(
         "--output", "-o",
         default=str(Path.home() / "youtube_content_output"),
@@ -613,6 +613,10 @@ def main():
         default="en",
         help="Comma-separated language codes (default: en)"
     )
+    parser.add_argument(
+        "--text",
+        help="Path to a transcript text file to process directly (skips YouTube fetch)"
+    )
     
     args = parser.parse_args()
     
@@ -620,9 +624,96 @@ def main():
     output_dir = Path(args.output)
     
     try:
-        result_dir = generate_all_formats(args.url, output_dir, languages)
+        if args.text:
+            transcript_path = Path(args.text)
+            if not transcript_path.exists():
+                print(f"Error: transcript file not found: {transcript_path}", file=sys.stderr)
+                sys.exit(1)
+            raw_transcript = transcript_path.read_text(encoding="utf-8")
+            video_id = "text_input"
+            transcript = clean_transcript(raw_transcript)
+            if not transcript and raw_transcript:
+                transcript = raw_transcript
+            warnings = []
+            music_artifacts = len(re.findall(r'\[♪+.*?♪+\]|♪.*?♪', raw_transcript, flags=re.DOTALL))
+            if music_artifacts > 3:
+                warnings.append("The transcript appears to contain music or copyrighted audio content markers.")
+            if len(transcript) < 500:
+                warnings.append("Transcript is very short. Output quality may be limited.")
+            if not warnings:
+                warnings.append("No issues detected.")
+        else:
+            if not args.url:
+                parser.error("provide a YouTube URL or use --text <transcript_file>")
+            result_dir = generate_all_formats(args.url, output_dir, languages)
+            print(f"\n✅ Success! All content formats generated in:")
+            print(f"   {result_dir}")
+            print(f"\nYou can now:")
+            print(f"  1. Review the generated content")
+            print(f"  2. Edit and customize it")
+            print(f"  3. Deliver to a client")
+            print(f"  4. Package multiple videos for a content repurposing service")
+            return
+        
+        # Shared output generation for transcript-only mode
+        print(f"Processing transcript: {transcript_path}")
+        print(f"Transcript length: {len(raw_transcript)} characters")
+        print(f"Cleaned transcript: {len(transcript)} characters")
+        print("\nGenerating content formats...")
+        output_dir.mkdir(parents=True, exist_ok=True)
+        
+        blog = create_blog_post(transcript, video_id)
+        blog_path = output_dir / "blog_post.md"
+        blog_path.write_text(blog, encoding="utf-8")
+        print(f"✓ Blog post: {blog_path}")
+        
+        thread = create_twitter_thread(transcript)
+        thread_path = output_dir / "twitter_thread.md"
+        with open(thread_path, 'w', encoding='utf-8') as f:
+            f.write("# Twitter/X Thread\n\n")
+            for i, post in enumerate(thread, 1):
+                f.write(f"**Tweet {i}** ({len(post)} chars)\n\n{post}\n\n---\n\n")
+        print(f"✓ Twitter thread: {thread_path}")
+        
+        quotes = extract_key_quotes(transcript)
+        quotes_path = output_dir / "key_quotes.md"
+        with open(quotes_path, 'w', encoding='utf-8') as f:
+            f.write("# Key Quotes\n\n")
+            for i, quote in enumerate(quotes, 1):
+                f.write(f'{i}. "{quote}"\n\n')
+        print(f"✓ Key quotes: {quotes_path}")
+        
+        summary = create_summary(transcript)
+        summary_path = output_dir / "summary.md"
+        with open(summary_path, 'w', encoding='utf-8') as f:
+            f.write(f"# Video Summary\n\n{summary}\n")
+        print(f"✓ Summary: {summary_path}")
+        
+        raw_path = output_dir / "transcript.txt"
+        raw_path.write_text(transcript, encoding='utf-8')
+        print(f"✓ Cleaned transcript: {raw_path}")
+        
+        warnings_path = output_dir / "warnings.txt"
+        with open(warnings_path, 'w', encoding='utf-8') as f:
+            f.write("Content Warnings\n\n")
+            for warning in warnings:
+                f.write(f"- {warning}\n")
+        print(f"✓ Warnings: {warnings_path}")
+        
+        info = {
+            "video_id": video_id,
+            "transcript_length": len(transcript),
+            "formats_generated": ["blog_post.md", "twitter_thread.md", "key_quotes.md", "summary.md", "transcript.txt", "warnings.txt"],
+            "output_directory": str(output_dir),
+            "warnings": warnings,
+            "mode": "transcript-only"
+        }
+        info_path = output_dir / "package_info.json"
+        with open(info_path, 'w', encoding='utf-8') as f:
+            json.dump(info, f, indent=2)
+        print(f"✓ Package info: {info_path}")
         print(f"\n✅ Success! All content formats generated in:")
-        print(f"   {result_dir}")
+        print(f"   {output_dir}")
         print(f"\nYou can now:")
         print(f"  1. Review the generated content")
         print(f"  2. Edit and customize it")

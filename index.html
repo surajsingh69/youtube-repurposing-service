@@ -3,550 +3,374 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free YouTube content repurposing toolkit. Download a Python script to extract transcripts and generate blog drafts, summaries, Twitter/X threads, and quote collections from YouTube videos locally on your computer.">
-    <meta name="keywords" content="free YouTube transcript generator, YouTube to blog, YouTube content toolkit, download transcript from YouTube, blog draft generator, Twitter thread from video, content repurposing toolkit, free YouTube tools">
-    <meta name="author" content="YouTube Content Toolkit">
-    <meta property="og:title" content="Free YouTube Transcript Generator & Content Repurposing Toolkit">
-    <meta property="og:description" content="Turn available YouTube transcripts into blog drafts, summaries, social threads, and quote collections. Free downloadable toolkit.">
+    <meta name="description" content="Free browser-based YouTube transcript processor. Paste a transcript to generate blog drafts, summaries, Twitter threads, and quotes locally in your browser.">
+    <meta name="keywords" content="free YouTube transcript processor, YouTube to blog, content repurposing toolkit, transcript to blog, browser-based content tool">
+    <link rel="canonical" href="https://surajsingh69.github.io/youtube-repurposing-service/">
+    <meta property="og:title" content="YouTube Content Toolkit">
+    <meta property="og:description" content="Free browser-based toolkit to process YouTube transcripts into blog drafts, summaries, threads, and quotes.">
     <meta property="og:type" content="website">
-    <title>Free YouTube Transcript Generator & Content Repurposing Toolkit</title>
+    <title>YouTube Content Toolkit</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #f8f9fa;
-            min-height: 100vh;
-        }
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: white;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-        }
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 60px 40px;
-            text-align: center;
-        }
-        .hero h1 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-        .hero p {
-            font-size: 1.2em;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto 30px;
-        }
-        .cta-button {
-            display: inline-block;
-            background: white;
-            color: #667eea;
-            padding: 15px 40px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.1em;
-            transition: transform 0.3s ease;
-        }
-        .cta-button:hover {
-            transform: scale(1.05);
-        }
-        .content {
-            padding: 40px;
-        }
-        .section {
-            margin-bottom: 40px;
-        }
-        .section h2 {
-            color: #667eea;
-            font-size: 1.8em;
-            margin-bottom: 15px;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 10px;
-        }
-        .section h3 {
-            color: #764ba2;
-            font-size: 1.3em;
-            margin-top: 20px;
-            margin-bottom: 10px;
-        }
-
-        .
-
-        .features {
-            list-style: none;
-            text-align: left;
-            margin-top: 20px;
-        }
-        .features li {
-            padding: 8px 0;
-            padding-left: 25px;
-            position: relative;
-        }
-        .features li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: #28a745;
-            font-weight: bold;
-            font-size: 1.2em;
-        }
-        .sample-box {
-            background: #f8f9fa;
-            border-left: 4px solid #667eea;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 5px;
-        }
-        .sample-box h4 {
-            color: #667eea;
-            margin-bottom: 10px;
-        }
-        .sample-box p {
-            color: #666;
-            font-style: italic;
-        }
-        .faq {
-            background: #f8f9fa;
-            padding: 30px;
-            border-radius: 10px;
-            margin-top: 30px;
-        }
-        .faq h3 {
-            color: #667eea;
-            margin-bottom: 15px;
-        }
-        .faq-item {
-            margin-bottom: 20px;
-        }
-        .faq-item h4 {
-            color: #333;
-            margin-bottom: 5px;
-        }
-        .disclaimer {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 20px;
-            font-size: 0.9em;
-        }
-        .nav {
-            background: #333;
-            padding: 15px 40px;
-            text-align: center;
-        }
-        .nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            padding: 8px 4px;
-            min-height: 44px;
-            display: inline-block;
-        }
-        .nav a:focus {
-            outline: 2px solid #ffd700;
-            outline-offset: 2px;
-        }
-        .ad-placeholder {
-            background: #f0f0f0;
-            border: 2px dashed #ccc;
-            border-radius: 10px;
-            padding: 40px;
-            text-align: center;
-            color: #666;
-            margin: 20px 0;
-        }
-        .tool-form {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 25px;
-            margin: 20px 0;
-            border: 1px solid #e9ecef;
-        }
-        .tool-form label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #555;
-        }
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-        .feature-card {
-            background: #f8f9fa;
-            border-radius: 10px;
-            padding: 20px;
-            text-align: center;
-            border: 1px solid #e9ecef;
-        }
-        .feature-card h3 {
-            margin-top: 0;
-            color: #667eea;
-        }
-        .feature-card p {
-            font-size: 0.95em;
-            color: #555;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; line-height: 1.6; color: #333; background: #f8f9fa; min-height: 100vh; }
+        .skip-link { position: absolute; top: -40px; left: 0; background: #667eea; color: white; padding: 8px 16px; z-index: 100; text-decoration: none; border-radius: 0 0 4px 0; }
+        .skip-link:focus { top: 0; }
+        nav { background: #333; padding: 15px 40px; text-align: center; }
+        nav a { color: white; text-decoration: none; margin: 0 15px; padding: 8px 4px; min-height: 44px; display: inline-block; }
+        nav a:focus { outline: 2px solid #ffd700; outline-offset: 2px; }
+        main { max-width: 1000px; margin: 0 auto; background: white; box-shadow: 0 0 20px rgba(0,0,0,0.1); }
+        .hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 60px 40px; text-align: center; }
+        .hero h1 { font-size: 2.5em; margin-bottom: 20px; font-weight: 700; }
+        .hero p { font-size: 1.2em; opacity: 0.9; max-width: 600px; margin: 0 auto 30px; }
+        .cta-button { display: inline-block; background: white; color: #667eea; padding: 15px 40px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 1.1em; transition: transform 0.3s ease; }
+        .cta-button:hover { transform: scale(1.05); }
+        .cta-button:focus { outline: 3px solid #ffd700; outline-offset: 2px; }
+        .content { padding: 40px; }
+        .section { margin-bottom: 40px; }
+        .section h2 { color: #667eea; font-size: 1.8em; margin-bottom: 15px; border-bottom: 3px solid #667eea; padding-bottom: 10px; }
+        .tool-input { background: #f8f9fa; border-radius: 10px; padding: 25px; margin: 20px 0; border: 1px solid #e9ecef; }
+        .tool-input label { display: block; margin-bottom: 8px; font-weight: bold; color: #555; }
+        .tool-input input[type="url"], .tool-input textarea { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 1em; margin-bottom: 15px; font-family: inherit; }
+        .tool-input textarea { min-height: 200px; resize: vertical; }
+        .tool-input input:focus, .tool-input textarea:focus { outline: 3px solid #667eea; outline-offset: 1px; }
+        .btn-row { display: flex; flex-wrap: wrap; gap: 10px; margin: 15px 0; }
+        .btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px 24px; border: none; border-radius: 5px; font-size: 1em; cursor: pointer; font-weight: bold; text-decoration: none; display: inline-block; }
+        .btn:hover { opacity: 0.9; }
+        .btn:focus { outline: 3px solid #ffd700; outline-offset: 2px; }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+        .btn-secondary { background: #6c757d; }
+        .output-section { background: #f8f9fa; border-radius: 10px; padding: 20px; margin: 20px 0; border: 1px solid #e9ecef; }
+        .output-section h3 { color: #667eea; margin-bottom: 10px; }
+        .output-box { background: white; border: 1px solid #ddd; border-radius: 5px; padding: 15px; margin: 10px 0; white-space: pre-wrap; word-wrap: break-word; max-height: 400px; overflow-y: auto; }
+        .error { background: #f8d7da; color: #721c24; padding: 12px; border-radius: 5px; margin: 10px 0; display: none; }
+        .privacy { background: #e3f2fd; border: 1px solid #90caf9; border-radius: 10px; padding: 20px; margin: 20px 0; }
+        .privacy h3 { color: #667eea; margin-bottom: 10px; }
+        .ad-placeholder { background: #f0f0f0; border: 2px dashed #ccc; border-radius: 10px; padding: 40px; text-align: center; color: #666; margin: 20px 0; }
+        .disclaimer { background: #fff3cd; border: 1px solid #ffeaa7; padding: 15px; border-radius: 5px; margin-top: 20px; font-size: 0.9em; }
+        footer { text-align: center; padding: 20px; background: #333; color: white; }
+        footer a { color: #90caf9; text-decoration: none; }
+        footer a:focus { outline: 2px solid #ffd700; outline-offset: 2px; }
         @media (max-width: 768px) {
-            .hero {
-                padding: 40px 20px;
-            }
-            .hero h1 {
-                font-size: 1.8em;
-            }
-            .hero p {
-                font-size: 1em;
-            }
-            .cta-button, .cta-secondary {
-                display: block;
-                margin: 10px auto;
-                max-width: 280px;
-            }
-            .cta-button:focus, .cta-secondary:focus {
-                outline: 3px solid #ffd700;
-                outline-offset: 2px;
-            }
-            .cta-secondary {
-                margin-left: auto;
-            }
-            .content {
-                padding: 20px;
-            }
-            .section h2 {
-                font-size: 1.5em;
-            }
-            .nav {
-                padding: 10px 20px;
-            }
-            .nav a {
-                margin: 5px 10px;
-            }
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-            .tool-form input {
-                font-size: 16px;
-            }
-            .usage-counter .count {
-                font-size: 1.5em;
-            }
+            .hero { padding: 40px 20px; }
+            .hero h1 { font-size: 1.8em; }
+            .hero p { font-size: 1em; }
+            .cta-button { display: block; margin: 10px auto; max-width: 280px; }
+            .content { padding: 20px; }
+            .section h2 { font-size: 1.5em; }
+            nav { padding: 10px 20px; }
+            nav a { margin: 5px 10px; }
+            .btn { width: 100%; margin: 5px 0; }
         }
-
         @media (max-width: 480px) {
-            .hero {
-                padding: 30px 15px;
-            }
-            .hero h1 {
-                font-size: 1.5em;
-            }
-            .content {
-                padding: 15px;
-            }
-            .section h2 {
-                font-size: 1.3em;
-            }
-            .nav a {
-                margin: 4px 6px;
-                padding: 10px 12px;
-                font-size: 0.9em;
-            }
+            .hero { padding: 30px 15px; }
+            .hero h1 { font-size: 1.5em; }
+            .content { padding: 15px; }
+            .section h2 { font-size: 1.3em; }
+            nav a { margin: 4px 6px; padding: 10px 12px; font-size: 0.9em; }
         }
     </style>
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
-    <nav role="navigation" aria-label="Main navigation" class="nav">
-        <a href="#tool">Free Toolkit</a>
-        <a href="#features">Features</a>
-        <a href="docs/how-to-repurpose-youtube-videos.html">Guide</a>
-        <a href="docs/social-media-strategies.html">Tips</a>
-        <a href="portfolio/index.html">Examples</a>
-        <a href="#contact">Contact</a>
+    <nav role="navigation" aria-label="Main navigation">
+        <a href="#tool">Toolkit</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#guide">Guide</a>
+        <a href="https://github.com/surajsingh69/youtube-repurposing-service" target="_blank" rel="noopener noreferrer">Repository</a>
+        <a href="https://github.com/surajsingh69/youtube-repurposing-service/issues" target="_blank" rel="noopener noreferrer">Issues</a>
     </nav>
-
-    <main id="main-content" class="container" role="main">
+    <main id="main-content" role="main">
         <div class="hero">
-            <h1>Free YouTube Transcript Generator & Content Repurposing Toolkit</h1>
-            <p>Turn available YouTube transcripts into blog drafts, summaries, social media threads, and quote collections. Content processing happens locally via a downloadable Python script—not on this website.</p>
-            <p style="background: rgba(255,255,255,0.15); padding: 12px 20px; border-radius: 8px; margin: 20px auto; max-width: 600px; font-size: 0.95em;"><strong>Important:</strong> This site does not process YouTube videos directly. Download the free Python toolkit and run it on your computer to generate content from transcripts.</p>
-            <a href="order.html" class="cta-button">Get the Free Toolkit</a>
-            <a href="order.html" class="cta-secondary">Download & Setup</a>
+            <h1>YouTube Content Toolkit</h1>
+            <p>Paste a transcript to generate blog drafts, summaries, Twitter threads, and quotes. All processing happens in your browser.</p>
+            <a href="#tool" class="cta-button">Open the Toolkit</a>
         </div>
-
         <div class="content">
-            
             <div class="section" id="tool">
-                <h2>Free Toolkit</h2>
-                <p>This is a free, downloadable toolkit that runs on your computer. No account required. No payment needed.</p>
-
-                <div class="usage-counter" id="usageCounter">
-                    <h3>Website Interface Usage</h3>
-                    <p>This static website includes a best-effort browser-based daily limit of <strong>5 interactions</strong>. This limit applies only to visiting this website interface, not to the downloaded Python script. The script can be run unlimited times on your computer.</p>
-                    <p>Remaining website interactions today: <span class="count" id="remainingCount">5</span> / 5</p>
-                    <p class="note" id="resetMessage" style="display:none;">Your website interaction count will reset at midnight local time. You can also clear your browser data to reset immediately.</p>
+                <h2>Browser Toolkit</h2>
+                <p>Paste a transcript below to generate a summary, blog draft, Twitter/X thread, key quotes, and cleaned transcript. Everything runs locally in your browser — no data is uploaded.</p>
+                <div class="tool-input">
+                    <label for="transcriptInput">Transcript Text</label>
+                    <textarea id="transcriptInput" placeholder="Paste the video transcript here..."></textarea>
+                    <div class="btn-row">
+                        <button class="btn" id="generateBtn" onclick="generateAll()">Generate All</button>
+                        <button class="btn btn-secondary" onclick="clearAll()">Clear</button>
+                    </div>
+                    <div class="error" id="errorMsg" aria-live="polite" aria-atomic="true"></div>
                 </div>
-
-                <div style="background: #e3f2fd; border: 2px solid #667eea; border-radius: 10px; padding: 25px; margin: 20px 0; text-align: center;">
-                    <h3 style="color: #667eea; margin-top: 0;">Download the Free Python Toolkit</h3>
-                    <p>The toolkit is a single Python script. Download it, install one dependency, and run it on your computer.</p>
-                    <p><a href="order.html" class="cta-button" style="display: inline-block; margin-top: 15px;">Download & Setup Instructions</a></p>
-                    <p style="margin-top: 15px; font-size: 0.9em; color: #555;">Or view the source directly on <a href="https://github.com/surajsingh69/youtube-repurposing-service" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
+                <div class="output-section" id="summaryOutput" style="display:none;">
+                    <h3>Summary</h3>
+                    <div class="output-box" id="summaryText"></div>
+                    <div class="btn-row">
+                        <button class="btn" onclick="copyOutput('summaryText')">Copy</button>
+                        <button class="btn btn-secondary" onclick="downloadFile('summary.md', document.getElementById('summaryText').textContent)">Download .md</button>
+                    </div>
+                </div>
+                <div class="output-section" id="blogOutput" style="display:none;">
+                    <h3>Blog Draft</h3>
+                    <div class="output-box" id="blogText"></div>
+                    <div class="btn-row">
+                        <button class="btn" onclick="copyOutput('blogText')">Copy</button>
+                        <button class="btn btn-secondary" onclick="downloadFile('blog_post.md', document.getElementById('blogText').textContent)">Download .md</button>
+                    </div>
+                </div>
+                <div class="output-section" id="threadOutput" style="display:none;">
+                    <h3>Twitter/X Thread</h3>
+                    <div class="output-box" id="threadText"></div>
+                    <div class="btn-row">
+                        <button class="btn" onclick="copyOutput('threadText')">Copy</button>
+                        <button class="btn btn-secondary" onclick="downloadFile('twitter_thread.md', document.getElementById('threadText').textContent)">Download .md</button>
+                    </div>
+                </div>
+                <div class="output-section" id="quotesOutput" style="display:none;">
+                    <h3>Key Quotes</h3>
+                    <div class="output-box" id="quotesText"></div>
+                    <div class="btn-row">
+                        <button class="btn" onclick="copyOutput('quotesText')">Copy</button>
+                        <button class="btn btn-secondary" onclick="downloadFile('key_quotes.md', document.getElementById('quotesText').textContent)">Download .md</button>
+                    </div>
+                </div>
+                <div class="output-section" id="transcriptOutput" style="display:none;">
+                    <h3>Cleaned Transcript</h3>
+                    <div class="output-box" id="transcriptText"></div>
+                    <div class="btn-row">
+                        <button class="btn" onclick="copyOutput('transcriptText')">Copy</button>
+                        <button class="btn btn-secondary" onclick="downloadFile('transcript.txt', document.getElementById('transcriptText').textContent)">Download .txt</button>
+                    </div>
                 </div>
             </div>
-<div class="section" id="features">
-                <h2>What the Toolkit Generates</h2>
-                <p>The toolkit takes a YouTube video URL and produces structured content from the available public transcript.</p>
-
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <h3>Blog Draft</h3>
-                        <p>A structured draft article with an overview, key points, discussion, and conclusion extracted from the transcript.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>Social Thread Draft</h3>
-                        <p>A draft Twitter/X thread selected from the transcript, formatted as individual posts.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>Candidate Quotes</h3>
-                        <p>Extracted quotable sentences from the transcript, formatted for social media or newsletters.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>Summary</h3>
-                        <p>A condensed summary of the video's main ideas, drawn from the transcript.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>Cleaned Transcript</h3>
-                        <p>The full transcript with artifacts, music notes, and speaker labels removed.</p>
-                    </div>
-                    <div class="feature-card">
-                        <h3>Downloadable Package</h3>
-                        <p>All outputs bundled as a downloadable package you can edit and use.</p>
-                    </div>
-                </div>
-            </div>
-
             <div class="section" id="how-it-works">
-                <h2>How to Use the Free Toolkit</h2>
+                <h2>How It Works</h2>
                 <ol>
-                    <li><strong>Download the Python script</strong> — Get the single-file toolkit from this site.</li>
-                    <li><strong>Install the dependency</strong> — Run <code>pip install youtube-transcript-api</code> in your Python environment.</li>
-                    <li><strong>Run the script</strong> — Execute <code>python youtube_repurposer.py "YOUR_VIDEO_URL"</code></li>
-                    <li><strong>Get your files</strong> — The toolkit creates a folder with blog draft, thread draft, quotes, summary, cleaned transcript, and warnings.</li>
-                    <li><strong>Edit and use</strong> — All outputs are automated first drafts. Review and edit before publishing.</li>
+                    <li><strong>Get a transcript</strong> — Use the Python script to fetch a YouTube transcript, or paste an existing transcript.</li>
+                    <li><strong>Paste it here</strong> — The browser tool processes the text locally.</li>
+                    <li><strong>Generate outputs</strong> — Click to create a summary, blog draft, thread, quotes, or all at once.</li>
+                    <li><strong>Copy or download</strong> — Use the outputs as starting drafts. Review and edit before publishing.</li>
                 </ol>
-
-                <div class="sample-box">
-                    <h4>Example Command</h4>
-                    <p><code>python youtube_repurposer.py "https://www.youtube.com/watch?v=aircAruvnKk"</code></p>
-                    <p>Output: <code>blog_post.md</code>, <code>twitter_thread.md</code>, <code>key_quotes.md</code>, <code>summary.md</code>, <code>transcript.txt</code>, <code>warnings.txt</code></p>
+                <div class="privacy">
+                    <h3>Privacy</h3>
+                    <p>This tool runs entirely in your browser using JavaScript. No transcript text, URLs, or generated content is sent to any server. No data is stored. You can disconnect from the internet after the page loads and it will still work.</p>
                 </div>
             </div>
-
-            <div class="section" id="limitations">
-                <h2>Limitations & Honest Expectations</h2>
-                <ul>
-                    <li><strong>Transcript availability:</strong> This toolkit only works with videos that have public transcripts. Some videos disable transcripts or have poor auto-generated text.</li>
-                    <li><strong>Automated drafts:</strong> Output is generated by rule-based algorithms, not advanced AI. Blog drafts, threads, and summaries may need substantial editing before publication.</li>
-                    <li><strong>No word-count guarantees:</strong> Draft length varies by transcript length and content. We do not guarantee specific word counts or "professional" finished quality.</li>
-                    <li><strong>No fixed turnaround:</strong> Processing speed depends on your computer and the video's transcript length. There are no guaranteed delivery times.</li>
-                    <li><strong>No human editing:</strong> Human review and editing are not included. You are responsible for reviewing and refining all outputs.</li>
-                    <li><strong>Copyright:</strong> You are responsible for ensuring you have the right to repurpose any video content. The toolkit flags music and copyright indicators for your review.</li>
-                </ul>
+            <div class="section" id="guide">
+                <h2>Guide</h2>
+                <p>For step-by-step strategies on repurposing video content, see the guide and tips pages.</p>
+                <p><a href="docs/how-to-repurpose-youtube-videos.html">How to Repurpose YouTube Videos &rarr;</a></p>
+                <p><a href="docs/social-media-strategies.html">Social Media Strategies &rarr;</a></p>
             </div>
-
-            <div class="section" id="sample">
-                <h2>Sample Output</h2>
-                <p>Below is a human-edited reference example from a 19-minute video on neural networks, showing the target format after editing. The raw automated draft will differ.</p>
-                
-                <div class="sample-box">
-                    <h4>Sample Blog Post Excerpt</h4>
-                    <p><strong>Title:</strong> How Neural Networks Recognize Handwritten Digits: A Beginner's Guide</p>
-                    <p>Your brain recognizes a handwritten "3" instantly, even when it's blurry or pixelated. Computers struggle with this same task—unless they use neural networks. In this post, we break down how a simple neural network learns to identify digits by processing layers of patterns, from edges to complete numbers.</p>
-                    <p><strong>Key Takeaway:</strong> Neural networks learn to recognize patterns by breaking images into layers of abstraction. A basic digit-recognition network uses 784 input neurons, two hidden layers of 16 neurons each, and 10 output neurons.</p>
-                </div>
-
-                <div class="sample-box">
-                    <h4>Sample Twitter Thread</h4>
-                    <p><strong>Tweet 1:</strong> Your brain recognizes a handwritten "3" instantly, even when it's blurry or pixelated. Computers struggle with this exact task—unless they use neural networks. Here's how a simple network learns to see digits:</p>
-                    <p><strong>Tweet 2:</strong> The network starts with 784 neurons, one for each pixel in a 28x28 image. Each holds a brightness value from 0 (black) to 1 (white). These form the input layer.</p>
-                </div>
-
-                <div class="sample-box">
-                    <h4>Sample Key Quote</h4>
-                    <p>"The goal? Layer 2 detects edges. Layer 3 combines edges into patterns like loops. By the final layer, the network has assembled patterns into complete digits."</p>
-                </div>
-
-                <p><a href="portfolio/polished_sample.md" target="_blank">View complete portfolio sample →</a></p>
-            </div>
-
-            <div class="section">
-                <h2>Why Use This Toolkit</h2>
-                <h3>⏱️ Saves Time</h3>
-                <p>What takes several hours of manual work takes minutes to generate an initial draft. You get back hours to focus on creating new content.</p>
-                
-                <h3>🎯 Consistent Structure</h3>
-                <p>Output follows a consistent format. Review and editing are recommended before publication.</p>
-                
-                <h3>🆓 Completely Free</h3>
-                <p>No payments, no subscriptions, no hidden costs. Download the toolkit and use it as much as you want.</p>
-                
-                <h3>🔧 Runs Locally</h3>
-                <p>Process videos on your own computer. No uploads to third-party servers. Your data stays with you.</p>
-            </div>
-
-            <div class="section">
-                <h2>Who This Is For</h2>
-                <ul>
-                    <li>✅ YouTube creators who want to repurpose long-form content</li>
-                    <li>✅ Social media managers needing quick Twitter threads</li>
-                    <li>✅ Bloggers looking for content from video sources</li>
-                    <li>✅ Coaches & consultants wanting written versions of their videos</li>
-                    <li>✅ Podcasters turning interviews into articles</li>
-                    <li>✅ Students & researchers extracting key points</li>
-                </ul>
-            </div>
-
-
-            <div class="section" id="privacy">
-                <h2>Privacy</h2>
-                <p>This site is intentionally simple about data handling:</p>
-                <ul>
-                    <li><strong>What is processed:</strong> The free website form only receives and validates a YouTube video URL/ID. No transcript, audio, or video content is sent to this website.</li>
-                    <li><strong>What is stored:</strong> The only stored data is your browser's daily usage count in localStorage. No URLs, transcripts, or personal information are stored on any server.</li>
-                    <li><strong>Where processing happens:</strong> The actual transcript extraction and content generation happen entirely on your computer via the downloaded Python script. No data is uploaded to external servers for processing.</li>
-                    <li><strong>Limitations:</strong> This is a static website with no backend. Daily limits are enforced client-side only and can be bypassed by clearing browser data. Do not enter sensitive, private, or copyrighted material you do not have rights to repurpose.</li>
-                </ul>
-            </div>
-
-            <div class="faq" id="faq">
-                <h3>Frequently Asked Questions</h3>
-                
-                <div class="faq-item">
-                    <h4>Is this really free?</h4>
-                    <p>Yes. The toolkit is free to download and use. There are no payments, subscriptions, or paid upgrades.</p>
-                </div>
-
-                <div class="faq-item">
-                    <h4>What do I need to run it?</h4>
-                    <p>You need Python installed on your computer, plus the <code>youtube-transcript-api</code> package. The toolkit works on Windows, Mac, and Linux.</p>
-                </div>
-
-                <div class="faq-item">
-                    <h4>Why is there a daily limit on the website?</h4>
-                    <p>The free website includes a best-effort client-side daily limit of 5 uses per browser. This is not a secure server-side limit. The actual processing happens on your computer via the downloaded script.</p>
-                </div>
-
-                <div class="faq-item">
-                    <h4>Can I use this for commercial purposes?</h4>
-                    <p>The toolkit is free for personal and commercial use, but you are responsible for ensuring you have the right to repurpose any video content. Review outputs before publishing.</p>
-                </div>
-
-                <div class="faq-item">
-                    <h4>What if a video has no transcript?</h4>
-                    <p>The toolkit will report an error. Some videos disable transcripts or have poor auto-generated text. Try a different video with captions enabled.</p>
-                </div>
-            </div>
-
             <div class="section" id="ads">
                 <h3>Advertising</h3>
-                <p>This site is ad-supported. Non-intrusive ad placements are reserved below. No ad provider is currently configured. If you are an ad network interested in supporting this free toolkit, please <a href="mailto:surajjsingh0111@gmail.com">get in touch</a>.</p>
-                
-                <div class="ad-placeholder">
-                    <strong>Ad Space (Leaderboard)</strong><br>
-                    728 × 90 — Reserved for approved ad provider
-                </div>
-
-                <div class="ad-placeholder">
-                    <strong>Ad Space (Sidebar / In-Content)</strong><br>
-                    300 × 250 — Reserved for approved ad provider
-                </div>
+                <p>This site is ad-supported. Non-intrusive ad placements are reserved below. No ad provider is currently configured.</p>
+                <div class="ad-placeholder"><strong>Ad Space (Leaderboard)</strong><br>728 &times; 90 &mdash; Reserved for approved ad provider</div>
+                <div class="ad-placeholder"><strong>Ad Space (Sidebar / In-Content)</strong><br>300 &times; 250 &mdash; Reserved for approved ad provider</div>
             </div>
-
             <div class="disclaimer">
                 <h4>Important Notes</h4>
-                <p>This toolkit requires videos with public transcripts. Some videos may have poor auto-generated text quality. Output is generated as a first draft by rule-based algorithms and requires review and editing before publication. The free website allowance is best-effort and client-side only. Human editing is not included. You are responsible for copyright compliance.</p>
-            </div>
-
-            <div class="section" style="text-align: center; margin-top: 40px;" id="contact">
-                <h2>Questions or Feedback?</h2>
-                <p>Found a bug or have a suggestion? Want to contribute to the toolkit?</p>
-                <a href="mailto:surajjsingh0111@gmail.com" class="cta-button">Contact Me</a>
+                <p>This toolkit only works with videos that have public transcripts. Output is generated by rule-based algorithms and requires review and editing before publication. You are responsible for copyright compliance.</p>
             </div>
         </div>
     </main>
+    <footer>
+        <p>Free YouTube Content Toolkit | <a href="https://github.com/surajsingh69/youtube-repurposing-service" target="_blank" rel="noopener noreferrer">GitHub</a> | <a href="https://github.com/surajsingh69/youtube-repurposing-service/issues" target="_blank" rel="noopener noreferrer">Report an Issue</a></p>
+    </footer>
     <script>
-        // Best-effort client-side daily limit
-        (function() {
-            const STORAGE_KEY = 'yt_toolkit_usage';
-            const MAX_USES = 5;
-
-            function getTodayKey() {
-                const d = new Date();
-                return `usage_${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+        function splitIntoSentences(text) {
+            const protectedWords = ['Mr.', 'Mrs.', 'Dr.', 'etc.', 'vs.', 'i.e.', 'e.g.', 'U.S.', 'U.K.'];
+            let processed = text;
+            for (const word of protectedWords) { processed = processed.replaceAll(word, word.replace('.', '')); }
+            const raw = processed.split(/[.!?]+/);
+            return raw.map(s => s.trim()).filter(s => s.length > 10);
+        }
+        function cleanTranscript(text) {
+            let cleaned = text.replace(/\[♪+.*?♪+\]/g, '');
+            cleaned = cleaned.replace(/♪.*?♪/g, '');
+            cleaned = cleaned.replace(/^\\s*(Speaker \\d+|Host|Interviewer|Guest):\\s*/gm, '');
+            cleaned = cleaned.replace(/\\s+/g, ' ');
+            cleaned = cleaned.replace(/\\n\\s*\\n/g, '\\n\\n');
+            cleaned = cleaned.replace(/\\b\\d{1,2}:\\d{2}\\b/g, '');
+            return cleaned.trim();
+        }
+        function scoreSentence(sentence, index, total) {
+            let score = 0;
+            const lower = sentence.toLowerCase();
+            const indicators = ['the key is', 'the most important', 'what matters most', 'the problem is', 'the solution is', 'remember that', 'the truth is', 'in reality', 'the fact is', 'this is crucial', 'what\'s important', 'the main point', 'the bottom line', 'the takeaway', 'the lesson', 'what we\'re going to do', 'the goal is', 'the hope is', 'the question is', 'the answer is', 'the point is', 'what this means', 'the idea is', 'the concept is', 'important to understand', 'worth noting', 'keep in mind'];
+            for (const ind of indicators) { if (lower.includes(ind)) score += 10; }
+            const actionWords = ['create', 'build', 'make', 'develop', 'implement', 'design', 'improve', 'recognize', 'learn', 'train', 'feed', 'compute'];
+            for (const word of actionWords) { if (lower.includes(word)) score += 3; }
+            const contrastWords = ['but', 'however', 'whereas', 'unlike', 'while', 'although', 'rather', 'instead'];
+            for (const word of contrastWords) { if (lower.includes(word)) score += 2; }
+            if (50 < sentence.length && sentence.length < 250) score += 1;
+            if (index < 3 || index > total - 3) score += 2;
+            if (sentence.startsWith(('The ', 'A ', 'An ', 'This ', 'That ', 'These ', 'Those '))) score += 1;
+            return score;
+        }
+        function extractKeyPoints(sentences, numPoints = 5) {
+            const scored = sentences.map((s, i) => ({ score: scoreSentence(s, i, sentences.length), text: s }));
+            scored.sort((a, b) => b.score - a.score);
+            return scored.filter(s => s.score > 0).slice(0, numPoints).map(s => s.text);
+        }
+        function createBlogPost(transcript) {
+            const sentences = splitIntoSentences(transcript);
+            if (!sentences.length) return '# Video Insights & Summary\n\nThe transcript for this video is unavailable or could not be processed.\n';
+            const keyPoints = extractKeyPoints(sentences, 5);
+            const introCandidates = sentences.slice(0, 12).filter(s => s.length > 50 && !s.toLowerCase().startsWith(('but', 'and', 'so', 'the goal is', 'what we\'re going to do')));
+            const intro = introCandidates[0] || sentences[0] || 'This post summarizes key insights from a recent video.';
+            let blog = '# Video Insights & Summary\n\n## Overview\n\n' + intro + '\n\n';
+            if (keyPoints.length >= 2) {
+                blog += '## Key Points\n\n';
+                for (let i = 0; i < keyPoints.length; i += 2) {
+                    blog += '**' + (i / 2 + 1) + '. ' + keyPoints[i] + '**\n';
+                    if (i + 1 < keyPoints.length) blog += keyPoints[i + 1] + '\n\n'; else blog += '\n';
+                }
+            } else {
+                blog += '## Key Takeaways\n\n';
+                keyPoints.forEach((point, i) => { if (point && point.length > 20) blog += (i + 1) + '. ' + point + '\n'; });
+                blog += '\n';
             }
-
-            function loadUsage() {
-                try {
-                    const raw = localStorage.getItem(STORAGE_KEY);
-                    if (!raw) return {};
-                    return JSON.parse(raw);
-                } catch (e) {
-                    return {};
+            blog += '## Discussion\n\n';
+            const used = new Set();
+            const bodyParagraphs = [];
+            for (const point of keyPoints) {
+                if (point.length < 20) continue;
+                const pointIdx = sentences.indexOf(point);
+                if (pointIdx === -1) continue;
+                const para = [point];
+                used.add(pointIdx);
+                for (let j = pointIdx + 1; j < Math.min(pointIdx + 3, sentences.length); j++) { if (!used.has(j) && sentences[j].length > 30) { para.push(sentences[j]); used.add(j); } }
+                for (let j = pointIdx - 1; j >= Math.max(pointIdx - 2, 0); j--) { if (!used.has(j) && sentences[j].length > 30) { para.unshift(sentences[j]); used.add(j); } }
+                const paragraphText = para.join(' ');
+                if (!bodyParagraphs.includes(paragraphText)) bodyParagraphs.push(paragraphText);
+            }
+            if (bodyParagraphs.length < 2) {
+                const fallback = [];
+                for (let i = 0; i < sentences.length && fallback.length < 2; i++) { if (!used.has(i) && sentences[i].length > 40) { fallback.push(sentences[i]); used.add(i); } }
+                if (fallback.length) bodyParagraphs.push(fallback.join(' '));
+            }
+            bodyParagraphs.slice(0, 5).forEach(p => blog += p + '\n\n');
+            blog += '## Conclusion\n\n';
+            const conclusionCandidates = sentences.slice(-12).filter(s => s.length > 40 && !s.toLowerCase().startsWith(('but', 'and', 'so', 'the goal is')));
+            const conclusion = conclusionCandidates[conclusionCandidates.length - 1] || (keyPoints[0] || 'This video explored an important topic in depth.');
+            blog += conclusion + '\n\n---\n*This summary was automatically generated from the video transcript.*\n';
+            return blog;
+        }
+        function createTwitterThread(transcript, maxPosts = 8) {
+            const sentences = splitIntoSentences(transcript);
+            if (!sentences.length) return ['Transcript unavailable or too short to create a thread.'];
+            const selected = [];
+            const seenStarts = new Set();
+            
+            function canAdd(sentence) {
+                if (selected.length >= maxPosts) return false;
+                if (selected.includes(sentence)) return false;
+                const start = sentence.slice(0, 40);
+                if (seenStarts.has(start)) return false;
+                return true;
+            }
+            
+            function addSentence(sentence) {
+                if (!canAdd(sentence)) return false;
+                selected.push(sentence);
+                seenStarts.add(sentence.slice(0, 40));
+                return true;
+            }
+            
+            const hookWords = ['imagine', 'what if', 'think about', 'consider this', 'here\'s the thing', 'the truth is', 'what matters', 'the problem', 'the solution', 'the key', 'important', 'surprising', 'secret', 'strategy', 'create', 'build', 'design', 'change', 'success', 'fail', 'learn', 'appreciate', 'crazy', 'daunting', 'cool', 'pretty cool'];
+            for (const sentence of sentences.slice(0, 12)) {
+                const lower = sentence.toLowerCase();
+                if (hookWords.some(w => lower.includes(w)) && sentence.length > 50 && addSentence(sentence)) break;
+            }
+            const bodyWords = ['but', 'however', 'whereas', 'unlike', 'while', 'rather', 'means', 'represents', 'corresponds', 'picks up', 'recognize', 'detect', 'combine', 'break down', 'layer', 'abstract'];
+            for (const sentence of sentences) {
+                if (selected.length >= maxPosts - 1) break;
+                const lower = sentence.toLowerCase();
+                if (bodyWords.some(w => lower.includes(w)) && sentence.length > 50 && canAdd(sentence)) {
+                    addSentence(sentence);
                 }
             }
-
-            function saveUsage(data) {
-                try {
-                    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-                } catch (e) {
-                    // Storage may be full or disabled
+            const closingWords = ['next', 'future', 'follow', 'stay', 'thank', 'hope', 'learn more', 'resources', 'watch', 'see', 'dig', 'challenge', 'assumptions', 'space', 'possible'];
+            for (const sentence of sentences.slice(-12).reverse()) {
+                if (selected.length >= maxPosts) break;
+                const lower = sentence.toLowerCase();
+                if (closingWords.some(w => lower.includes(w)) && sentence.length > 50 && canAdd(sentence)) {
+                    addSentence(sentence);
+                    break;
                 }
             }
-
-            function getRemaining() {
-                const data = loadUsage();
-                const today = getTodayKey();
-                const used = data[today] || 0;
-                return Math.max(0, MAX_USES - used);
+            if (selected.length < 3) {
+                for (const sentence of sentences) {
+                    if (selected.length >= maxPosts) break;
+                    if (sentence.length > 70 && canAdd(sentence)) {
+                        addSentence(sentence);
+                    }
+                }
             }
-
-            function incrementUsage() {
-                const data = loadUsage();
-                const today = getTodayKey();
-                data[today] = (data[today] || 0) + 1;
-                saveUsage(data);
+            const posts = selected.slice(0, maxPosts).filter(p => p.length >= 50);
+            if (!posts.length && sentences.length) posts.push(sentences[0]);
+            return posts;
+        }
+        function extractKeyQuotes(transcript, maxQuotes = 5) {
+            const sentences = splitIntoSentences(transcript);
+            const scored = [];
+            for (const sentence of sentences) {
+                let score = 0;
+                const lower = sentence.toLowerCase();
+                const phrases = ['the truth is', 'what matters', 'the key is', 'remember', 'the problem is', 'the solution', 'the secret', 'the strategy', 'in reality', 'the fact is', 'the bottom line', 'the takeaway', 'the most important', 'the lesson', 'what i learned', 'the reality'];
+                for (const phrase of phrases) { if (lower.includes(phrase)) score += 10; }
+                const actionable = ['create', 'build', 'make', 'do', 'start', 'stop', 'avoid'];
+                for (const word of actionable) { if (lower.includes(word)) score += 3; }
+                if (60 < sentence.length && sentence.length < 200) score += 2;
+                if (sentence.startsWith(('The ', 'What ', 'Why ', 'How ', 'If ', 'Don\'t ', 'Never ', 'Always '))) score += 2;
+                if (score > 0) scored.push({ score, text: sentence });
             }
-
-            function updateUI() {
-                const remaining = getRemaining();
-                const el = document.getElementById('remainingCount');
-                const msg = document.getElementById('resetMessage');
-                if (el) el.textContent = remaining;
-                if (msg) msg.style.display = remaining === 0 ? 'block' : 'none';
+            scored.sort((a, b) => b.score - a.score);
+            return scored.slice(0, maxQuotes).map(s => s.text);
+        }
+        function createSummary(transcript, maxLength = 500) {
+            const sentences = splitIntoSentences(transcript);
+            if (!sentences.length) return 'Transcript unavailable or too short to summarize.';
+            const keyPoints = extractKeyPoints(sentences, Math.min(8, sentences.length));
+            const keySet = new Set(keyPoints);
+            const scored = [];
+            sentences.forEach((s, i) => {
+                let score = 0;
+                if (keySet.has(s)) score += 15;
+                const indicators = ['the key is', 'the most important', 'what matters most', 'the problem is', 'the solution is', 'remember that', 'the truth is', 'in reality', 'the fact is', 'this is crucial', 'what\'s important', 'the main point', 'the bottom line', 'the takeaway', 'the lesson', 'what we\'re going to do', 'the goal is', 'the hope is', 'the question is', 'the answer is', 'the point is', 'what this means', 'the idea is', 'the concept is', 'important to understand', 'worth noting', 'keep in mind'];
+                for (const ind of indicators) { if (s.toLowerCase().includes(ind)) score += 8; }
+                const actionWords = ['create', 'build', 'make', 'develop', 'implement', 'design', 'improve', 'recognize', 'learn', 'train', 'feed', 'compute'];
+                for (const word of actionWords) { if (s.toLowerCase().includes(word)) score += 3; }
+                const contrastWords = ['but', 'however', 'whereas', 'unlike', 'while', 'although', 'rather', 'instead'];
+                for (const word of contrastWords) { if (s.toLowerCase().includes(word)) score += 2; }
+                if (40 < s.length && s.length < 220) score += 1;
+                if (score > 0) scored.push({ score, index: i, text: s });
+            });
+            scored.sort((a, b) => b.score - a.score);
+            const selected = [];
+            const seen = new Set();
+            if (scored.length) { const top = scored[0]; if (!selected.includes(top.text)) { selected.push(top.text); seen.add(top.text.slice(0, 40)); } }
+            const quarter = Math.floor(sentences.length / 4);
+            const sections = [[quarter, quarter * 2], [quarter * 2, quarter * 3], [quarter * 3, sentences.length]];
+            for (const [start, end] of sections) {
+                const candidates = scored.filter(s => start <= s.index && s.index < end && !selected.includes(s.text) && !seen.has(s.text.slice(0, 40)));
+                if (candidates.length) { selected.push(candidates[0].text); seen.add(candidates[0].text.slice(0, 40)); }
             }
-
-            window.getRemaining = getRemaining;
-            window.incrementUsage = incrementUsage;
-            window.updateUsageUI = updateUI;
-        })();
-
-
-
-
+            for (const item of scored) { if (selected.length >= 6) break; if (!selected.includes(item.text) && !seen.has(item.text.slice(0, 40))) { selected.push(item.text); seen.add(item.text.slice(0, 40)); } }
+            selected.sort((a, b) => sentences.indexOf(a) - sentences.indexOf(b));
+            let summary = selected.join('. ');
+            if (summary && !summary.endsWith('.')) summary += '.';
+            if (summary.length > maxLength) {
+    const cutoff = summary.slice(0, maxLength - 3);
+    const lastDot = cutoff.lastIndexOf('.');
+    summary = lastDot > 0 ? cutoff.slice(0, lastDot) + '.' + '...' : cutoff + '...';
+}
+            return summary;
+        }
+        function showError(msg) { const el = document.getElementById('errorMsg'); el.textContent = msg; el.style.display = 'block'; }
+        function hideError() { const el = document.getElementById('errorMsg'); el.style.display = 'none'; }
+        function showSection(id) { document.getElementById(id).style.display = 'block'; }
+        function generateAll() { hideError(); const transcript = document.getElementById('transcriptInput').value.trim(); if (!transcript) { showError('Please paste a transcript to process.'); return; } const cleaned = cleanTranscript(transcript); if (!cleaned) { showError('The transcript appears to be empty after cleaning.'); return; } const summary = createSummary(cleaned); const blog = createBlogPost(cleaned); const thread = createTwitterThread(cleaned); const quotes = extractKeyQuotes(cleaned); document.getElementById('summaryText').textContent = summary; document.getElementById('blogText').textContent = blog; document.getElementById('threadText').textContent = thread.map((t, i) => '**Tweet ' + (i + 1) + '** (' + t.length + ' chars)\n\n' + t).join('\n\n---\n\n'); document.getElementById('quotesText').textContent = quotes.map((q, i) => (i + 1) + '. "' + q + '"').join('\n\n'); document.getElementById('transcriptText').textContent = cleaned; showSection('summaryOutput'); showSection('blogOutput'); showSection('threadOutput'); showSection('quotesOutput'); showSection('transcriptOutput'); }
+        function clearAll() { hideError(); document.getElementById('transcriptInput').value = ''; ['summaryOutput','blogOutput','threadOutput','quotesOutput','transcriptOutput'].forEach(id => { document.getElementById(id).style.display = 'none'; }); }
+        function copyOutput(elementId) { const text = document.getElementById(elementId).textContent; navigator.clipboard.writeText(text).then(() => { alert('Copied to clipboard.'); }).catch(() => { showError('Unable to copy. Please select and copy manually.'); }); }
+        function downloadFile(filename, content) { const blob = new Blob([content], { type: 'text/plain' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = filename; document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url); }
     </script>
 </body>
 </html>
