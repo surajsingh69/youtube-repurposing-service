@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Order YouTube content repurposing. Turn your video into blog posts, Twitter threads, and social media content.">
-    <title>Order - YouTube Content Repurposing Service</title>
+    <meta name="description" content="Download the free YouTube content repurposing toolkit. Extract transcripts and generate blog drafts, summaries, Twitter/X threads, and quote collections from YouTube videos via a local Python script.">
+    <title>Download Free YouTube Toolkit</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -26,53 +26,44 @@
             color: white;
             text-decoration: none;
             margin-right: 15px;
+            padding: 8px 4px;
+            min-height: 44px;
+            display: inline-block;
+        }
+        .nav a:focus {
+            outline: 2px solid #ffd700;
+            outline-offset: 2px;
         }
         h1 { color: #667eea; margin-bottom: 20px; }
         h2 { color: #764ba2; margin-top: 30px; margin-bottom: 15px; }
-        .form-group {
-            margin-bottom: 20px;
+        .download-box {
+            background: #e3f2fd;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: center;
         }
-        label {
-            display: block;
+        .download-box h2 {
+            margin-top: 0;
+            color: #667eea;
+        }
+        .step {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-left: 4px solid #764ba2;
+        }
+        .step h3 {
+            color: #764ba2;
             margin-bottom: 5px;
-            font-weight: bold;
-            color: #555;
         }
-        input, select, textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1em;
-            font-family: inherit;
-        }
-        textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-        .radio-group {
-            display: flex;
-            gap: 15px;
-            margin-top: 5px;
-        }
-        .radio-group label {
-            font-weight: normal;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 5px;
-            font-size: 1.1em;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        button:hover {
-            opacity: 0.9;
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
         }
         .note {
             background: #e3f2fd;
@@ -81,63 +72,107 @@
             margin-top: 20px;
             font-size: 0.9em;
         }
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 20px 15px;
+                max-width: none;
+            }
+            .nav {
+                padding: 10px 15px;
+                text-align: left;
+            }
+            .nav a {
+                display: inline-block;
+                margin: 5px 10px 5px 0;
+                padding: 8px 12px;
+                min-height: 44px;
+                line-height: 1.2;
+            }
+            h1 {
+                font-size: 1.5em;
+            }
+            h2 {
+                font-size: 1.3em;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="nav">
+    <a href="#main" class="skip-link">Skip to main content</a>
+    <nav role="navigation" aria-label="Main navigation" class="nav">
         <a href="./index.html">Home</a>
         <a href="docs/how-to-repurpose-youtube-videos.html">Guide</a>
         <a href="docs/social-media-strategies.html">Tips</a>
-        <a href="./portfolio/index.html">Sample</a>
+        <a href="./portfolio/index.html">Examples</a>
+    </nav>
+
+    <main id="main" role="main">
+    <h1>Download the Free YouTube Toolkit</h1>
+
+    <div class="download-box">
+        <h2>Get Started in 3 Steps</h2>
+        <p>The toolkit is a single Python script. Download it, install one dependency, and run it on your computer.</p>
     </div>
 
-    <h1>Order YouTube Content Repurposing</h1>
+    <div class="step">
+        <h3>Step 1: Download the Script</h3>
+        <p>Download <code>youtube_repurposer.py</code> from the project repository or copy it from the project folder.</p>
+    </div>
 
-    <p>Fill out this form to request a quote or place an order. I'll respond with confirmation and pricing.</p>
+    <div class="step">
+        <h3>Step 2: Install the Dependency</h3>
+        <p>Open a terminal and run:</p>
+        <p><code>pip install youtube-transcript-api</code></p>
+        <p>If you use a virtual environment, activate it first.</p>
+    </div>
 
-    <form action="mailto:surajjsingh0111@gmail.com" method="POST" enctype="text/plain">
-        <div class="form-group">
-            <label for="name">Your Name *</label>
-            <input type="text" id="name" name="name" required>
-        </div>
+    <div class="step">
+        <h3>Step 3: Run the Toolkit</h3>
+        <p>Execute the script with a YouTube video URL:</p>
+        <p><code>python youtube_repurposer.py "https://www.youtube.com/watch?v=VIDEO_ID"</code></p>
+        <p>Replace <code>VIDEO_ID</code> with the actual video ID. The toolkit creates an output folder with all generated files.</p>
+    </div>
 
-        <div class="form-group">
-            <label for="email">Email Address *</label>
-            <input type="email" id="email" name="email" required>
-        </div>
+    <h2>What You Get</h2>
+    <ul>
+        <li><strong>blog_post.md</strong> — Structured blog draft</li>
+        <li><strong>twitter_thread.md</strong> — Draft Twitter/X thread</li>
+        <li><strong>key_quotes.md</strong> — Candidate quotes from the transcript</li>
+        <li><strong>summary.md</strong> — Condensed video summary</li>
+        <li><strong>transcript.txt</strong> — Cleaned full transcript</li>
+        <li><strong>warnings.txt</strong> — Any content warnings or issues</li>
+    </ul>
 
-        <div class="form-group">
-            <label for="video_url">YouTube Video URL *</label>
-            <input type="url" id="video_url" name="video_url" placeholder="https://www.youtube.com/watch?v=..." required>
-        </div>
-
-        <div class="form-group">
-            <label>Package *</label>
-            <div class="radio-group">
-                <label><input type="radio" name="package" value="starter" required> Starter ($2.99)</label>
-                <label><input type="radio" name="package" value="standard"> Standard ($4.99)</label>
-                <label><input type="radio" name="package" value="bulk"> Bulk ($14.99)</label>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label for="instructions">Special Instructions</label>
-            <textarea id="instructions" name="instructions" placeholder="Any specific tone, word count, focus areas, or other requirements..."></textarea>
-        </div>
-
-        <button type="submit">Send Order Request</button>
-    </form>
+    <div class="warning">
+        <h4>Important</h4>
+        <p>This toolkit only works with videos that have public transcripts. Some videos disable transcripts or have poor auto-generated text. Output is automated and may require editing before publication. Human editing is not included.</p>
+    </div>
 
     <div class="note">
-        <strong>Note:</strong> This form opens your email client. If it doesn't work, email me directly at <a href="mailto:surajjsingh0111@gmail.com">surajjsingh0111@gmail.com</a> with the same information.
+        <strong>Note:</strong> This is a free toolkit with no payments or account required. If you have questions, email <a href="mailto:surajjsingh0111@gmail.com">surajjsingh0111@gmail.com</a>.
     </div>
 
-    <h2>What Happens Next?</h2>
-    <ol>
-        <li>I'll confirm the video has a usable transcript</li>
-        <li>I'll send you a quote and delivery estimate</li>
-        <li>Once approved, I'll process the video and deliver the drafts</li>
-        <li>You'll receive all formatted files via email</li>
-    </ol>
+    
+    <h2>Privacy & Data Handling</h2>
+    <ul>
+        <li><strong>Website processing:</strong> This site does not receive, upload, or store transcripts, video content, or generated outputs. The website form only validates the URL format and tracks daily usage locally.</li>
+        <li><strong>Local processing only:</strong> All transcript extraction and content generation happens on your computer via the Python script. No data is sent to external servers.</li>
+        <li><strong>Stored data:</strong> Daily usage limits are tracked in your browser's localStorage. No URLs, transcripts, or personal information are stored on any server.</li>
+        <li><strong>Limitations:</strong> This is a static site with no backend. Usage limits are client-side only. Do not use this toolkit with videos you do not have rights to repurpose.</li>
+    </ul>
+
+<h2>Project Repository</h2>
+    <p>The source code and script are available at:<br>
+    <a href="https://github.com/surajsingh69/youtube-repurposing-service" target="_blank" rel="noopener noreferrer">https://github.com/surajsingh69/youtube-repurposing-service</a></p>
+
 </body>
+</main>
 </html>

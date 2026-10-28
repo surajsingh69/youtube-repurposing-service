@@ -1,16 +1,17 @@
-# YouTube Content Repurposing Service
+# YouTube Content Repurposing Toolkit
 
-Turn YouTube videos into blog posts, Twitter threads, and social media content.
+Free downloadable toolkit that turns YouTube videos into blog drafts, summaries, Twitter/X threads, and quote collections.
 
 ## Site Structure
 
-- `index.html` - Landing page with services, pricing, and FAQ
-- `order.html` - Customer order/inquiry form
-- `docs/how-to-repurpose-youtube-videos.html` - SEO guide
-- `docs/social-media-strategies.html` - SEO article
-- `portfolio/index.html` - Portfolio showcase
-- `portfolio/polished_sample.md` - Sample deliverables
-- `SERVICE_DESCRIPTION.md` - Service overview
+- `youtube_repurposer.py` - Main Python toolkit script
+- `index.html` - Landing page with free toolkit, features, and usage limit
+- `order.html` - Download and setup instructions
+- `docs/how-to-repurpose-youtube-videos.html` - Guide to repurposing videos
+- `docs/social-media-strategies.html` - Social media strategies
+- `portfolio/index.html` - Portfolio examples (human-edited reference + raw automated output)
+- `portfolio/polished_sample.md` - Reference sample
+- `SERVICE_DESCRIPTION.md` - Toolkit overview
 
 ## Deployment
 
